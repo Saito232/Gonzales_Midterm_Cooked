@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Genre extends Model
 {
     protected $fillable = ['name','description'];
-    public function movies(): HasMany
+    public function books(): HasMany
     {
-        return $this->hasMany(Movie::class);
+        return $this->hasMany(Book::class);
     }
 }

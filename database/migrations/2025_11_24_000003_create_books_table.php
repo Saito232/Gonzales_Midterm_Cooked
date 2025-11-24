@@ -3,15 +3,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMoviesTable extends Migration
+class CreateBooksTable extends Migration
 {
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->string('director');
-            $table->year('release_year');
+            $table->string('author');
+            $table->year('published_year');
             $table->unsignedBigInteger('genre_id')->nullable();
             $table->decimal('rating', 3, 1)->nullable();
             $table->text('description')->nullable();
@@ -22,6 +22,6 @@ class CreateMoviesTable extends Migration
     }
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('books');
     }
 }

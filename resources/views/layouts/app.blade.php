@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Blockbuster</title>
+  <title>Unilibrary</title>
   @vite('resources/css/app.css')
 </head>
 <body class="light-mode min-h-screen">
@@ -16,7 +16,7 @@
           <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
               <span class="text-blue-600 font-bold text-lg">🎟️</span>
             </div>
-            <h1 class="text-xl font-bold">Blockbuster</h1>
+            <h1 class="text-xl font-bold">Unilibrary</h1>
         </div>
       </div>
 
@@ -24,8 +24,8 @@
       <nav class="p-4 space-y-2 relative">
         <a href="{{ route('dashboard') }}" 
            class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200">
-          <span class="text-xl">🎥</span>
-          <span>Movies</span>
+          <span class="text-xl">📚</span>
+          <span>Books</span>
         </a>
         <a href="{{ route('genres.index') }}" 
            class="nav-link {{ request()->routeIs('genres.*') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200">
@@ -58,15 +58,27 @@
     <!-- Main Content -->
     <main class="main-content ml-64 flex-1 p-6">
       @if(session('success'))
-        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+        <div id="successToast" class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
           {{ session('success') }}
         </div>
+        <script>
+          setTimeout(function() {
+            const toast = document.getElementById('successToast');
+            if (toast) toast.style.display = 'none';
+          }, 3000);
+        </script>
       @endif
-      
+
       @if(session('error'))
-        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+        <div id="errorToast" class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
           {{ session('error') }}
         </div>
+        <script>
+          setTimeout(function() {
+            const toast = document.getElementById('errorToast');
+            if (toast) toast.style.display = 'none';
+          }, 3000);
+        </script>
       @endif
 
       @yield('content')
@@ -115,7 +127,7 @@
           btnSidebar.classList.remove('dark-mode');
         }
       }
-      localStorage.setItem('blockbusterMode', mode);
+      localStorage.setItem('unilibraryMode', mode);
     }
     function toggleModeSidebar() {
       const current = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
@@ -134,7 +146,7 @@
     });
     // On load, set mode from localStorage or default to light
     document.addEventListener('DOMContentLoaded', function() {
-      const saved = localStorage.getItem('blockbusterMode');
+      const saved = localStorage.getItem('unilibraryMode');
       setMode(saved === 'dark' ? 'dark' : 'light');
     });
   </script>

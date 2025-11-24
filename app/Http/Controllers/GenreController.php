@@ -10,7 +10,7 @@ class GenreController extends Controller
     // Display all genres with movies count
     public function index()
     {
-        $genres = Genre::withCount('movies')->get();
+        $genres = Genre::withCount('books')->get();
         return view('genres', compact('genres'));
     }
 
@@ -43,8 +43,8 @@ class GenreController extends Controller
     // Delete a genre and detach it from movies
     public function destroy(Genre $genre)
     {
-        // Set genre_id of associated movies to null before deleting
-        $genre->movies()->update(['genre_id' => null]);
+        // Set genre_id of associated books to null before deleting
+        $genre->books()->update(['genre_id' => null]);
 
         $genre->delete();
 

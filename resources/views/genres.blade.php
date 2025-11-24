@@ -5,7 +5,7 @@
 <div class="bg-white shadow-sm sticky top-0 z-50 -mx-6 px-6 py-4 mb-6">
   <div class="flex justify-between items-center">
     <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
-      <span class="text-3xl">🎟️</span> Blockbuster Genres
+      <span class="text-3xl">📚</span> Unilibrary Genres
     </h1>
     <div class="text-sm text-gray-600">
       {{ \Carbon\Carbon::now()->format('l, F j, Y') }}
@@ -73,7 +73,7 @@
         <tr>
           <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Genre Name</th>
           <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Description</th>
-          <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Movies Count</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Books Count</th>
           <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
         </tr>
       </thead>
@@ -94,8 +94,8 @@
           </td>
           <td class="px-6 py-4 text-sm">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-              🎥 {{ $g->movies_count }} 
-              <span class="ml-1">{{ $g->movies_count === 1 ? 'movie' : 'movies' }}</span>
+              📚 {{ $g->books_count }} 
+              <span class="ml-1">{{ $g->books_count === 1 ? 'book' : 'books' }}</span>
             </span>
           </td>
           <td class="px-6 py-4 text-sm">
