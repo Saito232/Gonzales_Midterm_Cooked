@@ -7,10 +7,21 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    // Display all genres with movies count
-    public function index()
+    // Display all genres with books count and search
+    public function index(Request $request)
     {
-        $genres = Genre::withCount('books')->get();
+        $query = Genre::withCount('books');
+        
+        // Search functionality
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+        
+        $genres = $query->get();
         return view('genres', compact('genres'));
     }
 
@@ -40,14 +51,14 @@ class GenreController extends Controller
         return redirect()->back()->with('success', 'Genre updated successfully!');
     }
 
-    // Delete a genre and detach it from movies
+    // Delete a genre and detach it from books (Soft delete)
     public function destroy(Genre $genre)
     {
-        // Set genre_id of associated books to null before deleting
+        // Set genre_id of associated books to null before soft deleting
         $genre->books()->update(['genre_id' => null]);
 
-        $genre->delete();
+        $genre->delete(); // Soft delete
 
-        return redirect()->back()->with('success', 'Genre deleted successfully!');
+        return redirect()->back()->with('success', 'Genre moved to trash successfully!');
     }
 }
